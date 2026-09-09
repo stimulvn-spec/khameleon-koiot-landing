@@ -308,28 +308,66 @@
   footer{padding:24px 18px 100px;font-size:12px;color:var(--text-muted);text-align:center;}
   footer a{text-decoration:underline;}
 
-  /* Sticky buy bar — sticky (not fixed) so it stays within the page-shell's own
-     width instead of stretching across the whole browser window on desktop. */
+  /* Sticky buy bar: the outer band runs full-bleed edge to edge (so there's no
+     empty gap beside it), the inner row reuses .wrap's max-width so the button
+     itself stays a sane size instead of stretching across the whole window. */
   .stickybar{
     position:sticky;bottom:0;z-index:20;
     background:var(--surface);border-top:1px solid var(--line);
-    padding:10px 16px calc(10px + env(safe-area-inset-bottom));
-    display:flex;align-items:center;gap:12px;
     box-shadow:0 -8px 24px -12px rgba(0,0,0,0.25);
+  }
+  .stickybar-inner{
+    display:flex;align-items:center;gap:12px;
+    padding-top:10px;padding-bottom:calc(10px + env(safe-area-inset-bottom));
   }
   .stickybar .sb-price{font-family:'IBM Plex Mono',monospace;line-height:1.1;}
   .stickybar .sb-new{font-weight:600;font-size:17px;}
   .stickybar .sb-old{font-size:11px;color:var(--text-muted);text-decoration:line-through;}
   .stickybar .cta-primary{margin:0;padding:13px 16px;font-size:15px;width:auto;flex:1;}
 
-  @media (min-width:640px){
-    body{background:var(--surface-2);}
-    .page-shell{
-      max-width:560px;margin:32px auto;border-radius:20px;
-      border:1px solid var(--line);box-shadow:var(--shadow);
+  /* Full-bleed bands stay edge to edge at every width; only the inner .wrap
+     widens as the viewport grows, so the page fills the screen with no dead
+     margins instead of floating as a narrow card. */
+  @media (min-width:700px){
+    .wrap{max-width:700px;}
+    .usp-grid{grid-template-columns:repeat(4,1fr);}
+  }
+
+  @media (min-width:1000px){
+    .wrap{max-width:1160px;padding:0 48px;}
+
+    .hero{
+      display:grid;grid-template-columns:1fr 1fr;column-gap:64px;align-items:center;
+      grid-template-areas:
+        "eyebrow media"
+        "title media"
+        "sub media"
+        "price media"
+        "rating media"
+        "cta media"
+        "ctarow media";
     }
-    .topbar{border-top-left-radius:20px;border-top-right-radius:20px;}
-    .stickybar{border-bottom-left-radius:20px;border-bottom-right-radius:20px;}
+    .hero-eyebrow{grid-area:eyebrow;}
+    .hero h1{grid-area:title;font-size:60px;}
+    .hero-sub{grid-area:sub;max-width:38ch;font-size:17px;}
+    .hero-photo-frame{grid-area:media;}
+    .hero-photo-frame img{max-height:460px;}
+    .price-row{grid-area:price;}
+    .rating-row{grid-area:rating;}
+    .cta-primary{grid-area:cta;}
+    .cta-row{grid-area:ctarow;}
+
+    .specs-grid{display:grid;grid-template-columns:1fr 1fr;column-gap:40px;align-items:start;}
+    .specs-tag{margin-bottom:0;}
+
+    .reviews-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+    .reviews-grid .review-card{margin-bottom:0;}
+
+    .info-grid{display:grid;grid-template-columns:repeat(3,1fr);column-gap:32px;}
+    .info-grid .info-row{border-top:none;padding:0;}
+
+    .final-cta{max-width:680px;margin:0 auto;}
+    footer{max-width:640px;margin-left:auto;margin-right:auto;}
   }
 </style>
 
@@ -436,6 +474,7 @@
   <section>
     <div class="section-eyebrow">Технічний паспорт</div>
     <h2>Характеристики</h2>
+    <div class="specs-grid">
     <div class="specs-tag">
       <div class="specs-tag-head"><span>STIMUL / ХАМЕЛЕОН</span><span>арт. 2971_2</span></div>
       <table class="specs-table">
@@ -451,6 +490,7 @@
       </table>
     </div>
 
+    <div>
     <div class="variant-block">
       <div class="variant-label">Колір</div>
       <div class="color-list" role="radiogroup" aria-label="Колір кросівок">
@@ -480,6 +520,8 @@
       <p class="variant-summary">Ваш вибір: розмір <b id="sel-size">43</b> (<span id="sel-cm">28.2</span> см устілка), колір <b id="sel-color">Койот</b>. Сезон Літо.</p>
       <p class="variant-note">Назвіть обраний розмір і колір під час замовлення — менеджер підтвердить наявність. Демі- та зимовий варіанти — на сторінці товару.</p>
     </div>
+    </div>
+    </div>
   </section>
 
   <!-- CUSTOMER PHOTOS -->
@@ -508,6 +550,7 @@
       <div class="meta">★★★★★<br>2 відгуки на stimul.in.ua</div>
     </div>
 
+    <div class="reviews-grid">
     <div class="review-card">
       <div class="review-head">
         <span class="review-name">Ihor Syvak</span>
@@ -525,13 +568,14 @@
       <div class="review-body">«Придбала черевики «Хамелеон» для міжсезоння, чорні, 39 розмір — для хайкінгу в Альпах наприкінці квітня. Розмір, згідно з довжиною устілки на сайті, підійшов ідеально. Нога не потіє, підошва супер: відмінне зчеплення з ґрунтом, камінням, скелями. 7 днів приблизно по 20 км — і жодної мозолі. Дуже дякую!»</div>
       <div class="review-reply"><b>STIMUL:</b> Ганна, дякуємо за такий відгук! Раді, що протягом такого довгого шляху взуття вас не підвело.</div>
     </div>
+    </div>
   </section>
 
   <!-- DELIVERY / PAYMENT / WARRANTY -->
   <section>
     <div class="section-eyebrow">Умови</div>
     <h2>Доставка й оплата</h2>
-    <div>
+    <div class="info-grid">
       <div class="info-row">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h11v10H3z"/><path d="M14 10h4l3 3v4h-7z"/><circle cx="7" cy="19" r="1.6"/><circle cx="17.5" cy="19" r="1.6"/></svg>
         <div><h3>Доставка</h3><p>Нова пошта по Україні — 110–155 ₴. Самовивіз з магазину — безкоштовно.</p></div>
@@ -572,12 +616,14 @@
 </div>
 
 <div class="stickybar">
-  <div class="sb-price">
-    <div class="sb-new">2 290 ₴</div>
-    <div class="sb-old">3 585 ₴</div>
-    <div class="sb-old" id="sb-selection" style="text-decoration:none;">43 · Койот</div>
+  <div class="stickybar-inner wrap">
+    <div class="sb-price">
+      <div class="sb-new">2 290 ₴</div>
+      <div class="sb-old">3 585 ₴</div>
+      <div class="sb-old" id="sb-selection" style="text-decoration:none;">43 · Койот</div>
+    </div>
+    <a class="cta-primary" href="https://stimul.in.ua/krosivky-khameleon-koiot-43-28.2-sm-ustilka-lito/" target="_blank" rel="noopener">Купити</a>
   </div>
-  <a class="cta-primary" href="https://stimul.in.ua/krosivky-khameleon-koiot-43-28.2-sm-ustilka-lito/" target="_blank" rel="noopener">Купити</a>
 </div>
 </div>
 
