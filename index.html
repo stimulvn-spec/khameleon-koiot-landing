@@ -334,10 +334,13 @@
   }
 
   @media (min-width:1000px){
-    .wrap{max-width:1160px;padding:0 48px;}
+    /* Fluid, uncapped-feeling width: margins stay a small, constant share of
+       the viewport instead of a fixed pixel cap that leaves a growing empty
+       band on wide and ultra-wide monitors. */
+    .wrap{max-width:min(1680px,94vw);padding:0;}
 
     .hero{
-      display:grid;grid-template-columns:1fr 1fr;column-gap:64px;align-items:center;
+      display:grid;grid-template-columns:1.05fr 1fr;column-gap:5vw;align-items:center;
       grid-template-areas:
         "eyebrow media"
         "title media"
@@ -348,10 +351,10 @@
         "ctarow media";
     }
     .hero-eyebrow{grid-area:eyebrow;}
-    .hero h1{grid-area:title;font-size:60px;}
-    .hero-sub{grid-area:sub;max-width:38ch;font-size:17px;}
-    .hero-photo-frame{grid-area:media;}
-    .hero-photo-frame img{max-height:460px;}
+    .hero h1{grid-area:title;font-size:clamp(48px,4.6vw,76px);}
+    .hero-sub{grid-area:sub;max-width:42ch;font-size:clamp(16px,1.1vw,19px);}
+    .hero-photo-frame{grid-area:media;justify-self:end;width:100%;max-width:640px;}
+    .hero-photo-frame img{max-height:min(52vh,560px);}
     .price-row{grid-area:price;}
     .rating-row{grid-area:rating;}
     .cta-primary{grid-area:cta;}
