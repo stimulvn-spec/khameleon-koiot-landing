@@ -334,10 +334,10 @@
   }
 
   @media (min-width:1000px){
-    /* Fluid, uncapped-feeling width: margins stay a small, constant share of
-       the viewport instead of a fixed pixel cap that leaves a growing empty
-       band on wide and ultra-wide monitors. */
-    .wrap{max-width:min(1680px,94vw);padding:0;}
+    /* No hard pixel cap: margins stay a small, constant share of the
+       viewport at any width — mobile, laptop, or ultra-wide — instead of a
+       fixed cap that leaves a growing empty band as screens get wider. */
+    .wrap{max-width:96vw;padding:0;}
 
     .hero{
       display:grid;grid-template-columns:1.05fr 1fr;column-gap:5vw;align-items:center;
@@ -353,8 +353,8 @@
     .hero-eyebrow{grid-area:eyebrow;}
     .hero h1{grid-area:title;font-size:clamp(48px,4.6vw,76px);}
     .hero-sub{grid-area:sub;max-width:42ch;font-size:clamp(16px,1.1vw,19px);}
-    .hero-photo-frame{grid-area:media;justify-self:end;width:100%;max-width:640px;}
-    .hero-photo-frame img{max-height:min(52vh,560px);}
+    .hero-photo-frame{grid-area:media;justify-self:end;width:100%;max-width:min(760px,42vw);}
+    .hero-photo-frame img{max-height:min(54vh,620px);}
     .price-row{grid-area:price;}
     .rating-row{grid-area:rating;}
     .cta-primary{grid-area:cta;}
